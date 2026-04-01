@@ -26,7 +26,7 @@ This lab demonstrates a multi-layer enterprise network with:
 
 | Device Type | Count | Purpose |
 |-------------|-------|---------|
-| Routers | 2 | Core routing, HSRP, OSPFv3 |
+| Routers | 4 | Core routing, HSRP, OSPFv3 |
 | Switches | 2 | Multi-layer switching, VLANs |
 | End Devices | 6 | DHCP clients, testing |
 
