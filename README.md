@@ -20,7 +20,7 @@ This lab demonstrates a multi-layer enterprise network with:
 
 ## 🏗️ Network Topology
 
-![Network Diagram](./topology-screenshot.png)
+![Network Diagram](./Topology-Screenshot.png)
 
 ### Device Summary
 
