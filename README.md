@@ -20,15 +20,15 @@ This lab demonstrates a multi-layer enterprise network with:
 
 ## 🏗️ Network Topology
 
-![Network Diagram](./Topology-Screenshot.png)
+![Network Diagram](https://github.com/avalos010/Networking-Portfolio/blob/main/Lab-VLANs-IPv6-OSPFv3/Topology-Screenshot.png)
 
 ### Device Summary
 
 | Device Type | Count | Purpose |
 |-------------|-------|---------|
-| Routers | TBD | Core routing, HSRP, OSPFv3 |
-| Switches | TBD | Multi-layer switching, VLANs |
-| End Devices | TBD | DHCP clients, testing |
+| Routers | 2 | Core routing, HSRP, OSPFv3 |
+| Switches | 2 | Multi-layer switching, VLANs |
+| End Devices | 6 | DHCP clients, testing |
 
 ---
 
