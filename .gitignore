@@ -1,0 +1,16 @@
+# Packet Tracer autosave files
+*.autosave
+*~
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log

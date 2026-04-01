@@ -1,0 +1,40 @@
+! R2 - Edge Router (NAT, OSPF, IPv6)
+! ===================================
+
+hostname R2
+
+ipv6 unicast-routing
+
+! Inside Interfaces (LAN side)
+interface GigabitEthernet0/0
+ ip address 10.0.1.2 255.255.255.252
+ ip nat inside
+ ipv6 address 2001:DB8:200::1/64
+ ipv6 ospf 1 area 0
+
+interface GigabitEthernet0/1
+ ip address 10.0.1.6 255.255.255.252
+ ip nat inside
+ ipv6 address 2001:DB8:201::1/64
+ ipv6 ospf 1 area 0
+
+! Outside Interface (Internet-facing)
+interface GigabitEthernet0/2
+ ip address 203.113.0.1 255.255.255.252
+ ip nat outside
+
+! OSPFv2 for IPv4
+router ospf 1
+ log-adjacency-changes
+ network 10.0.1.0 0.0.0.3 area 0
+ network 10.0.0.0 0.0.0.3 area 0
+ network 192.168.0.0 0.0.255.255 area 0
+
+! OSPFv3 for IPv6
+ipv6 router ospf 1
+ log-adjacency-changes
+
+! NAT Overload (PAT) for Internet Access
+ip nat inside source list 1 interface GigabitEthernet0/2 overload
+
+access-list 1 permit 192.168.0.0 0.0.255.255
