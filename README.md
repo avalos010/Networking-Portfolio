@@ -18,7 +18,7 @@ I believe in **learning by doing**. Rather than just studying theory, I build re
 ## 📚 Projects
 
 ### 1. Enterprise Network Lab (VLANs, IPv6, OSPFv3, DHCP, HSRP)
-📁 **Location:** [`./Lab-VLANs-IPv6-OSPFv3-DHCP-HSRP/`](./Lab-VLANs-IPv6-OSPFv3-DHCP-HSRP/)
+📁 **Location:** [`./Lab-VLANs-IPv6-OSPFv3/`](./Lab-VLANs-IPv6-OSPFv3/)
 
 A comprehensive multi-layer enterprise topology demonstrating:
 
@@ -96,7 +96,7 @@ Feel free to:
 git clone https://github.com/avalos010/networking-portfolio.git
 
 # Navigate to a project
-cd networking-portfolio/Lab-VLANs-IPv6-OSPFv3-DHCP-HSRP
+cd networking-portfolio/Lab-VLANs-IPv6-OSPFv3
 
 # Open the .pkt file in Packet Tracer and explore!
 ```
