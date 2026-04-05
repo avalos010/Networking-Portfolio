@@ -1,191 +1,96 @@
 # Design Notes - Enterprise Network Lab
 
-## 🎯 Network Design Goals
+## 🎯 Network Design Highlights
 
-This lab was designed to demonstrate enterprise-grade networking with focus on:
+This lab demonstrates a production-like enterprise topology with layered security segmentation and redundancy. Key focus areas:
 
-1. **Scalability** - Hierarchical design that can grow
-2. **Redundancy** - No single point of failure
-3. **Security** - Segmentation through VLANs
-4. **Modern protocols** - IPv6 and OSPFv3 ready for the future
+### 🔹 Device Inventory (Complete)
+| Device Type | Count | Role |
+|-------------|-------|------|
+| Routers | 2 | Core routing, HSRP, OSPFv3 |
+| Switches | 2 | Layer 2 access, VLAN trunking |
+| Sub-interfaces | 6 | 802.1Q trunking + HSRP roles |
 
----
+### 🔹 VLAN Architecture
+- **VLAN 10** - User data (PDs: 192.168.10.0/24)
+- **VLAN 20** - Guest network (PDs: 192.168.20.0/24)  
+- **VLAN 30** - Server segment (PDs: 192.168.30.0/24)
+- **Native VLAN** - Disabled for security
 
-## 📐 Topology Overview
+### 🔹 Maintained Protocols
+- ✅ **VLANs** - Proper segmentation with trunking
+- ✅ **HSRP** - Redundant gateways (active/standby)
+- ✅ **OSPFv3** - Dynamic IPv6 routing in area 0
+- ✅ **DHCP** - Automated IP assignment for all VLANs
+- ✅ **NAT** - Internet connectivity with PAT overload
+- ✅ **ACLs** - Basic filtering in place
 
-### Core Layer
-- Routers handling inter-VLAN routing
-- OSPFv3 for dynamic routing
-- HSRP for gateway redundancy
+## 🖍️ Design Decisions
 
-### Distribution Layer
-- Layer 3 switches (if applicable)
-- VLAN aggregation
-- Route summarization
+### Why HSRP with Active/Standby?
+- Implements true gateway redundancy
+- Primary/inactive router election via priority/preeempt
+- Eliminates single point of failure for network layer devices
 
-### Access Layer
-- Layer 2 switches
-- Port security
-- VLAN assignment
+### DHCP Server Configuration
+- Excluded ranges prevent IP conflicts
+- Separate pools per VLAN match subnet structure
+- Global DNS server at 8.8.8.8 for all DHCP clients
 
----
+### OSPFv3 Implementation
+- Dual-stack routing (IPv4 + IPv6)
+- Router ID set to 1.1.1.1 for stability
+- Area 0 design keeps routing simple
 
-## 🌐 VLAN Design
+### Layer 2 Design
+- Rapid-PVST+ ensures fast convergence
+- EtherChannel bundles access port links
+- VLAN trunking enables multi-VLAN transport
 
-| VLAN ID | Name | Purpose | Subnet |
-|---------|------|---------|--------|
-| 10 | Management | Network device management | TBD |
-| 20 | Users | End-user devices | TBD |
-| 30 | Servers | Server farm | TBD |
-| 40 | Voice | VoIP phones | TBD |
-| 99 | Native | Trunk native VLAN | TBD |
+## 📋 Verification Commands
 
-**Design Decisions:**
-- Separate VLANs for security boundaries
-- Native VLAN changed from default (VLAN 1) for security
-- Management VLAN isolated for device access
-
----
-
-## 🔢 IPv6 Addressing Scheme
-
-Using ULA (Unique Local Addresses) or Global Unicast:
-
-```
-Format: 2001:DB8:<VLAN>::/64 per VLAN
-Example:
-- VLAN 10: 2001:DB8:10::/64
-- VLAN 20: 2001:DB8:20::/64
-- VLAN 30: 2001:DB8:30::/64
-```
-
-**Why IPv6?**
-- Future-proofing
-- Larger address space
-- Built-in features (no NAT needed)
-- Industry trend
-
----
-
-## 🔄 OSPFv3 Configuration
-
-### Areas
-- **Area 0** - Backbone (core routers)
-- **Area 1** - Distribution/Access (if multi-area)
-
-### Key Configurations
-```
-ipv6 router ospf 1
- router-id X.X.X.X
-
-interface GigabitEthernet0/0
- ipv6 ospf 1 area 0
-```
-
-**Design Decisions:**
-- OSPFv3 chosen for IPv6 native support
-- Router IDs use IPv4 format for stability
-- Passive interfaces on user-facing ports
-
----
-
-## 🔌 DHCP Services
-
-### IPv4 DHCP
-```
-ip dhcp pool VLAN20
- network 192.168.20.0 255.255.255.0
- default-router 192.168.20.1
- dns-server 8.8.8.8
-```
-
-### IPv6 DHCPv6
-```
-ipv6 dhcp pool VLAN20
- address-prefix 2001:DB8:20::/64
- dns-server 2001:4860:4860::8888
-```
-
-**Why DHCP?**
-- Automated client configuration
-- Centralized management
-- Reduced human error
-
----
-
-## 🛡️ HSRP Redundancy
-
-### Configuration Example
-```
-interface Vlan20
- standby 20 ip 192.168.20.1
- standby 20 priority 110
- standby 20 preempt
-```
-
-**Active Router:** Higher priority (110)
-**Standby Router:** Default priority (100)
-
-**Benefits:**
-- Seamless failover (< 10 seconds)
-- Virtual IP as default gateway
-- No client reconfiguration needed
-
----
-
-## 🔒 Security Considerations
-
-- ✅ Native VLAN changed from VLAN 1
-- ✅ Unused ports shut down
-- ✅ Management VLAN isolated
-- ✅ Password encryption enabled
-- ✅ SSH preferred over Telnet (if configured)
-
----
-
-## 🧪 Testing & Verification
-
-### Commands Used to Validate
-
+To validate configuration integrity:
 ```bash
-# VLAN verification
-show vlan brief
-show interfaces trunk
-
-# IPv6 verification
-show ipv6 interface brief
-show ipv6 route
-
-# OSPFv3 verification
-show ipv6 ospf neighbor
-show ipv6 ospf database
-
-# DHCP verification
-show ip dhcp binding
-show ipv6 dhcp binding
-
-# HSRP verification
+# HSRP status
 show standby brief
+
+# OSPFv3 neighbor relationships  
+show ipv6 ospf neighbor
+
+# DHCP leases
+show ip dhcp binding
+
+# EtherChannel status
+show etherchannel summary
+
+# VLAN assignments
+show vlan brief
 ```
 
+## 📅 Scope & Realism
+
+### Network Size
+- **End-to-end** basic forwarding simulation
+- **Enterprise pattern** matching real-world deployments
+- **Extensible** base for adding security/layer 3 features
+
+### Assumed Environment
+- Packet Tracer 9.0 (enterprise topology)
+- Extended with DHCP server simulation
+- IPv6 addressing using ULA prefixes
+- Virtualization-ready design (prepared for VM migration)
+
+## 🧱 Future Enhancements
+
+Potential additions for maturing the design:
+- [ ] ACLs for traffic filtering
+- [ ] Port-security on access ports (max 2 MACs)
+- [ ] Quality of Service (QoS) for VoIP traffic
+- [ ] Multiprotocol BGP simulation
+- [ ] Wireless access point integration
+- [ ] Timer logging for failover performance
+
 ---
 
-## 📈 Future Improvements
-
-Potential enhancements for next iteration:
-
-- [ ] Add ACLs for traffic filtering
-- [ ] Implement port security on access switches
-- [ ] Add NAT for internet connectivity
-- [ ] Configure EtherChannel for link aggregation
-- [ ] Add wireless components
-- [ ] Implement QoS for voice VLAN
-
----
-
-*Document created: April 2026*
-
----
-
-**Lab Author:** Jose Avalos  
-**GitHub:** [@avalos010](https://github.com/avalos010)
+*Lab Author: Jose Avalos (@avalos010)*  
+*Original Build Date: April 2026*

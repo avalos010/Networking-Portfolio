@@ -1,132 +1,122 @@
-# Networking Portfolio - Enterprise Lab
+# 🔐 Jose Avalos - Networking Portfolio
 
-## 🌐 Big Lab: VLANs, IPv6, OSPFv3, DHCP, HSRP
-
-A comprehensive enterprise network design showcasing advanced routing and switching technologies.
+Welcome to my networking portfolio! This repository showcases my practical skills in enterprise network design, routing, switching, and security implementations.
 
 ---
 
-## 📋 Overview
+## 👋 About Me
 
-This lab demonstrates a multi-layer enterprise network with:
+**Name:** Jose Avalos  
+**GitHub:** [@avalos010](https://github.com/avalos010)  
+**Focus:** Network Engineering | Infrastructure | Security  
+**Status:** Building expertise, pursuing CCNA certification
 
-- **VLANs** - Segmented network for security and broadcast control
-- **IPv6** - Full dual-stack implementation
-- **OSPFv3** - Dynamic routing for IPv6
-- **DHCP** - Automated IP address assignment (IPv4 & IPv6)
-- **HSRP** - First-hop redundancy for high availability
-
----
-
-## 🏗️ Network Topology
-
-![Network Diagram](https://github.com/avalos010/Networking-Portfolio/blob/main/Lab-VLANs-IPv6-OSPFv3/Topology-Screenshot.png)
-
-### Device Summary
-
-| Device Type | Count | Purpose |
-|-------------|-------|---------|
-| Routers | 4 | Core routing, HSRP, OSPFv3 |
-| Switches | 2 | Multi-layer switching, VLANs |
-| End Devices | 6 | DHCP clients, testing |
+I believe in **learning by doing**. Rather than just studying theory, I build real network topologies, configure them from scratch, and document my design decisions. This portfolio is proof of my hands-on experience.
 
 ---
 
-## 📁 Project Structure
+## 📚 Projects
 
-```
-networking-portfolio/
-├── README.md
-├── Big-Lab-VLANs-IPv6-OSPFv3/
-│   ├── topology-screenshot.png    # Export from Packet Tracer
-│   ├── configs/                   # Device configurations
-│   │   ├── router-*.txt
-│   │   └── switch-*.txt
-│   └── design-notes.md            # Design decisions & explanations
-├── .pkt                           # Original Packet Tracer file
-└── .gitignore
-```
+### 1. Enterprise Network Lab (VLANs, IPv6, OSPFv3, DHCP, HSRP)
+📁 **Location:** [`./Lab-VLANs-IPv6-OSPFv3-DHCP-HSRP/`](./Lab-VLANs-IPv6-OSPFv3-DHCP-HSRP/)
 
----
+A comprehensive multi-layer enterprise topology demonstrating:
 
-## 🚀 How to Use
+| Technology | Implementation |
+|------------|----------------|
+| **VLANs** | 3 segmented networks (Users, Guest, Servers) |
+| **HSRP** | Gateway redundancy with active/standby routers |
+| **OSPFv3** | Dual-stack dynamic routing (IPv4 + IPv6) |
+| **DHCP** | Automated IP assignment for all VLANs |
+| **NAT/PAT** | Internet connectivity with overload translation |
+| **EtherChannel** | Link aggregation for uplink redundancy |
+| **Rapid-PVST+** | Fast spanning-tree convergence |
 
-### Open in Packet Tracer
+**Device Count:** 2 Routers + 2 Switches + 6 Sub-interfaces
 
-1. Download Cisco Packet Tracer 9.0+
-2. Open `Big lab VLANS,IPV6, ospfv3, dhcp ,hsrp.pkt`
-3. Explore the topology and device configurations
-
-### View Configurations
-
-All device configs are exported in `/configs`:
-
-```bash
-cat Big-Lab-VLANs-IPv6-OSPFv3/configs/<device-name>-config.txt
-```
+👉 **See full documentation:** [Lab README](./Lab-VLANs-IPv6-OSPFv3/README.md)
 
 ---
 
-## 🔧 Key Technologies Demonstrated
+## 🛠️ Skills Demonstrated
 
-### VLAN Configuration
-- Multiple VLANs for departmental segmentation
-- Trunk ports between switches and routers
-- Native VLAN configuration
+### Layer 2 Technologies
+- ✅ VLAN segmentation and trunking (802.1Q)
+- ✅ EtherChannel/LACP link aggregation
+- ✅ Rapid-PVST+ spanning-tree
+- ✅ Switch port configuration (access/trunk modes)
+
+### Layer 3 Technologies
+- ✅ Inter-VLAN routing (router-on-a-stick)
+- ✅ HSRP first-hop redundancy
+- ✅ OSPFv2 and OSPFv3 dynamic routing
+- ✅ Static and default routing
+
+### Network Services
+- ✅ DHCP server configuration (IPv4)
+- ✅ DNS server assignment
+- ✅ NAT/PAT for internet access
+- ✅ ACL basics for traffic filtering
 
 ### IPv6 Implementation
-- Global unicast addressing
-- Link-local addresses
-- Dual-stack with IPv4
-
-### OSPFv3 Routing
-- Multi-area OSPF for IPv6
-- Router ID configuration
-- Neighbor adjacencies
-
-### DHCP Services
-- IPv4 DHCP pools on routers
-- IPv6 DHCPv6 for stateful addressing
-- Relay agents where needed
-
-### HSRP Redundancy
-- Active/standby gateway configuration
-- Virtual IP for default gateways
-- Preemption and priority settings
+- ✅ Global unicast addressing
+- ✅ Dual-stack configuration
+- ✅ OSPFv3 for IPv6 routing
+- ✅ IPv6 address planning
 
 ---
 
-## 🎯 Learning Objectives
+## 📖 How to Use This Repository
 
-This lab validates skills in:
-- ✅ Enterprise network design
-- ✅ Layer 2 switching (VLANs, trunks)
-- ✅ Layer 3 routing (OSPFv3)
-- ✅ IPv6 addressing and migration
-- ✅ Network services (DHCP)
-- ✅ High availability (HSRP)
+### For Recruiters & Hiring Managers
+Each project folder contains:
+- **README.md** - Project overview and topology details
+- **design-notes.md** - My design decisions and rationale
+- **configs/** - Exported device configurations (trimmed to key sections)
+- **Topology screenshot** - Visual representation of the network
+- **Packet Tracer file** - Original `.pkt` file for hands-on exploration
+
+### For Fellow Learners
+Feel free to:
+- Download and open the `.pkt` files in Cisco Packet Tracer
+- Review my configurations and compare with your own
+- Reach out via GitHub if you have questions!
 
 ---
 
-## 📝 Design Notes
+## 🚀 Getting Started
 
-See [design-notes.md](./Big-Lab-VLANs-IPv6-OSPFv3/design-notes.md) for detailed explanations of design decisions, IP addressing schemes, and configuration rationale.
+### Prerequisites
+- **Cisco Packet Tracer 9.0+** (free via Cisco Networking Academy)
+- Basic understanding of OSI model and networking fundamentals
 
----
+### Quick Start
+```bash
+# Clone this repository
+git clone https://github.com/avalos010/networking-portfolio.git
 
-## 🛠️ Tools Used
+# Navigate to a project
+cd networking-portfolio/Lab-VLANs-IPv6-OSPFv3-DHCP-HSRP
 
-- Cisco Packet Tracer 9.0.0
-- Cisco IOS (simulated)
+# Open the .pkt file in Packet Tracer and explore!
+```
 
 ---
 
 ## 📬 Contact
 
-**Built by Jose Avalos** — Networking enthusiast aspiring to make an impact!
+**GitHub:** [@avalos010](https://github.com/avalos010)  
+**Email:** luizavalos40@gmail.com
+**LinkedIn:** [LinkedIn](https://www.linkedin.com/in/jluisdev)
 
-🔗 GitHub: [@avalos010](https://github.com/avalos010)
+I'm actively seeking opportunities in network engineering, NOC roles, and infrastructure positions. If you're looking for someone who's passionate about networking and committed to continuous learning, let's connect!
 
 ---
 
-*Last updated: April 2026*
+## 📝 License
+
+This portfolio is open source and available for educational purposes. Feel free to learn from it, but please don't claim it as your own work.
+
+---
+
+*Built with ❤️ by Jose Avalos*
